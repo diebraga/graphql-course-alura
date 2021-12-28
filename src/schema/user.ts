@@ -5,6 +5,7 @@ export const usersSchema = gql`
 
   # This "User" type defines the queryable fields for every book in our data source.
   type User {
+    id: Int!
     name: String!
     active: Boolean!
     email: String!
@@ -15,6 +16,7 @@ export const usersSchema = gql`
   # case, the "books" query returns an array of zero or more Books (defined above).
   type Query {
     users: [User]
+    user(id: ID!): User!
   }
 `;
 

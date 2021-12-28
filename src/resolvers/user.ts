@@ -1,18 +1,12 @@
-
+import { prisma } from "../lib/prisma";
 
 export const userResolver = {
   Query: {
-    users: () => [
-      {
-        name: "Diego Braga",
-        active: true,
-        email: "diebrggg@gmail.com"
-      },
-      {
-        name: "Jair Amaral",
-        active: true,
-        email: "jairttoo@gmail.com"
+    users: (root) => prisma.user.findMany(),
+    user: (root, args) => prisma.user.findFirst({
+      where: {
+        id: Number(args.id)
       }
-    ]
+    })
   }
 }
