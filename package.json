@@ -1,0 +1,26 @@
+{
+  "name": "typescript-graphql",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --no-notify --respawn --transpile-only src/server",
+    "start": "node dist/server",
+    "clean": "rm -rf dist",
+    "build": "npm -s run clean && npm -s run generate && tsc"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "dependencies": {
+    "apollo-server": "3.5.0",
+    "graphql": "15.8.0",
+    "graphql-scalars": "1.14.1"
+  },
+  "devDependencies": {
+    "@types/node": "16.11.17",
+    "ts-node": "10.4.0",
+    "ts-node-dev": "1.1.8",
+    "typescript": "4.5.4"
+  }
+}
