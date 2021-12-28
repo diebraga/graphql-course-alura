@@ -5,10 +5,17 @@ export const usersSchema = gql`
 
   # This "User" type defines the queryable fields for every book in our data source.
   type User {
-    id: Int!
+    id: ID!
     name: String!
     active: Boolean!
     email: String!
+    role: Role!
+  }
+
+  type Role {
+    id: ID!
+    type: String!
+    users: [User]
   }
 
   # The "Query" type is special: it lists all of the available queries that
@@ -17,6 +24,10 @@ export const usersSchema = gql`
   type Query {
     users: [User]
     user(id: ID!): User!
+
+    roles: [Role]
+    role(id: ID!): Role!
   }
+
 `;
 
