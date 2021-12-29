@@ -1,3 +1,4 @@
+import { GraphQLScalarType } from "graphql";
 import { prisma } from "../lib/prisma";
 
 export const userResolver = {
@@ -48,7 +49,7 @@ export const userResolver = {
         },
       }
     }),
-    updateUser: (root: any, user: any) => prisma.user.update({
+    updateUser: async (root: any, user: any) => await prisma.user.update({
       where: {
         id: Number(user.id)
       },
@@ -64,6 +65,14 @@ export const userResolver = {
             id: Number(user.roleId)
           },
         },
+      }
+    }),
+    deleteUser: async (root: any, user: any) => await prisma.user.delete({
+      where: {
+        id: Number(user.id)
+      },
+      include: {
+        role: true
       }
     })
   }

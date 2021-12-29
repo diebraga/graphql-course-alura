@@ -10,12 +10,14 @@ export const usersSchema = gql`
     active: Boolean!
     email: String!
     role: Role
+    createdAt: String
   }
 
   type Role {
     id: ID!
     type: String!
     users: [User]
+    createdAt: String
   }
 
   # The "Query" type is special: it lists all of the available queries that
@@ -30,9 +32,9 @@ export const usersSchema = gql`
   }
 
   type Mutation {
-    createUser(name: String!, active: Boolean!, email: String!, roleId: Int): User!
+    createUser(name: String!, active: Boolean!, email: String!, roleId: Int, createdAt: String): User!
     updateUser(id: ID!, name: String!, active: Boolean!, email: String!, roleId: Int): User!
-
+    deleteUser(id: ID!): User!
   }
 `;
 
