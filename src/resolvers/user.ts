@@ -15,7 +15,7 @@ export const userResolver = {
         role: true,
       }
     }),
-    
+
     roles: (root: any, args: any) => prisma.role.findMany({
       include: {
         users: true,
@@ -28,6 +28,42 @@ export const userResolver = {
       },
       include: {
         users: true
+      }
+    })
+  },
+
+  Mutation: {
+    createUser: async (root: any, user: any) => await prisma.user.create({
+      include: {
+        role: true
+      },
+      data: {
+        email: user.email,
+        name: user.name,
+        active: user.active,
+        role: {
+          connect: {
+            id: Number(user.roleId)
+          },
+        },
+      }
+    }),
+    updateUser: (root: any, user: any) => prisma.user.update({
+      where: {
+        id: Number(user.id)
+      },
+      include: {
+        role: true
+      },
+      data: {
+        email: user.email,
+        name: user.name,
+        active: user.active,
+        role: {
+          connect: {
+            id: Number(user.roleId)
+          },
+        },
       }
     })
   }

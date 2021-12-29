@@ -9,7 +9,7 @@ export const usersSchema = gql`
     name: String!
     active: Boolean!
     email: String!
-    role: Role!
+    role: Role
   }
 
   type Role {
@@ -29,5 +29,10 @@ export const usersSchema = gql`
     role(id: ID!): Role!
   }
 
+  type Mutation {
+    createUser(name: String!, active: Boolean!, email: String!, roleId: Int): User!
+    updateUser(id: ID!, name: String!, active: Boolean!, email: String!, roleId: Int): User!
+
+  }
 `;
 
