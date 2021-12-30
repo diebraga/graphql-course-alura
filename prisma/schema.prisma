@@ -19,6 +19,7 @@ model User {
   roleId Int @default(1)
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
+  class Class?
 }
 
 model Role {
@@ -27,4 +28,15 @@ model Role {
   users User[]
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt 
+}
+
+model Class {
+  id    Int     @id @default(autoincrement())
+  description  String
+  vacancies String  
+  startsAt String
+  teacher   User @relation(fields: [teacherId], references: [id])
+  teacherId Int // relation scalar field (used in the `@relation` attribute above)
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
 }
