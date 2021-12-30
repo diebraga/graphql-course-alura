@@ -3,6 +3,13 @@ import { gql } from 'apollo-server'
 export const usersSchema = gql`
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
+  input UserInput {
+    name: String
+    active: Boolean
+    email: String
+    roleId: Int, 
+    createdAt: String
+  }
   # This "User" type defines the queryable fields for every book in our data source.
   type User {
     id: ID!

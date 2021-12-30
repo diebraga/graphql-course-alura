@@ -1,13 +1,16 @@
-import { GraphQLScalarType } from "graphql";
 import { prisma } from "../lib/prisma";
+import { ApolloError } from 'apollo-server-errors';
 
 export const userResolver = {
   Query: {
-    users: (root: any) => prisma.user.findMany({
-      include: {
-        role: true,
-      }
-    }),
+    users: async (root: any, args: any) => {
+      const response = await prisma.user.findMany({
+        include: {
+          role: true,
+        }
+      })
+      return response
+    },
     user: (root: any, args: any) => prisma.user.findFirst({
       where: {
         id: Number(args.id)
@@ -34,21 +37,24 @@ export const userResolver = {
   },
 
   Mutation: {
-    createUser: async (root: any, user: any) => await prisma.user.create({
-      include: {
-        role: true
-      },
-      data: {
-        email: user.email,
-        name: user.name,
-        active: user.active,
-        role: {
-          connect: {
-            id: Number(user.roleId)
-          },
+    createUser: async (root: any, user: any) => {
+      const response = await prisma.user.create({
+        include: {
+          role: true
         },
-      }
-    }),
+        data: {
+          email: user.email,
+          name: user.name,
+          active: user.active,
+          role: {
+            connect: {
+              id: Number(user.roleId)
+            },
+          },
+        }
+      })
+      return response
+    },
     updateUser: async (root: any, user: any) => await prisma.user.update({
       where: {
         id: Number(user.id)
