@@ -20,6 +20,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
   class Class?
+  enrollment Enrollment?
 }
 
 model Role {
@@ -39,4 +40,12 @@ model Class {
   teacherId Int // relation scalar field (used in the `@relation` attribute above)
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
+  enrollments Enrollment[]
+}
+
+model Enrollment {
+  id    Int     @id @default(autoincrement())
+  student   User @relation(fields: [studentId], references: [id])
+  studentId Int // relation scalar field (used in the `@relation` attribute above)
+  classes Class[]
 }
