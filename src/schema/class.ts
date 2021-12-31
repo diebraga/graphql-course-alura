@@ -18,7 +18,12 @@ export const classSchema = gql`
   type Query {
     classes: [Class]
     class(id: ID!): Class!
+  }
 
+  type Mutation {
+    createClass(description: String!, vacancies: String!, startsAt: String!, teacher: ID!): Class
+    updateClass(id: ID!, description: String!, vacancies: String!, startsAt: String!, teacher: ID!): Class
+    deleteClass(id: ID!): Class!
   }
 
 `;

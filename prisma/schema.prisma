@@ -19,8 +19,8 @@ model User {
   roleId Int @default(1)
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
-  class Class?
-  enrollment Enrollment?
+  class Class[]
+  enrollments Enrollment[]
 }
 
 model Role {
@@ -45,7 +45,6 @@ model Class {
 
 model Enrollment {
   id    Int     @id @default(autoincrement())
-  student   User @relation(fields: [studentId], references: [id])
-  studentId Int // relation scalar field (used in the `@relation` attribute above)
+  students   User[]
   classes Class[]
 }
